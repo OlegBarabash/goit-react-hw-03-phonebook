@@ -35,7 +35,7 @@ export class App extends Component {
     const isExist = this.state.contacts.find(
       ({ contactName }) => contactName.toLowerCase() === name.toLowerCase()
     );
-    console.log('isExist', isExist);
+
     if (isExist) {
       alert(`${isExist.contactName} is alredy in contacts!`);
       return;
@@ -75,19 +75,18 @@ export class App extends Component {
   };
 
   render() {
-    const filteredContacts = this.filterResult();
     return (
       <Container>
         <h1>Phonebook</h1>
         <ContactForm onAdd={this.addContact} />
-        {!filteredContacts.length ? (
+        {!this.state.contacts.length ? (
           <h2>No contacts</h2>
         ) : (
           <>
             <h2>Contacts</h2>
             <Filter onFilter={this.onFind} />
             <ContactList
-              contArr={filteredContacts}
+              contArr={this.filterResult()}
               onDelete={this.deleteContact}
             />
           </>
